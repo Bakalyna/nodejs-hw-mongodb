@@ -1,16 +1,27 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import { env } from './utils/env.js';
+import checkEnv from './utils/env.js';
 import errorHandler from './middleware/errorHandler.js';
 import notFoundHandler from './middleware/notFoundHandler.js';
-import contactsRouter from './routers/contacts.js';
-const PORT = Number(env('PORT', '3000'));
+import rootRouter from './routers/index.js';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+
+dotenv.config();
 
 export const setupServer = async () => {
-  const app = express();
+  const PORT = checkEnv('PORT', '3000');
 
-  app.use(express.json());
+  const app = express();
+  app.use(cookieParser());
+
+  app.use(
+    express.json({
+      type: ['application/json', 'application/vnd.api+json'],
+      limit: '100kb',
+    }),
+  );
   app.use(cors());
   app.use(
     pino({
@@ -20,8 +31,10 @@ export const setupServer = async () => {
     }),
   );
 
-  app.use("/contacts",contactsRouter);
+  app.use(rootRouter);
+
   app.use('*', notFoundHandler);
+
   app.use(errorHandler);
 
   app.listen(PORT, () => {
