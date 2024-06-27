@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
-import { env } from '../utils/env.js';
+import checkEnv  from '../utils/env.js';
 
 export const initMongoConnection = async () => {
   try {
-    const user = env('MONGODB_USER');
-    const pwd = env('MONGODB_PASSWORD');
-    const url = env('MONGODB_URL');
-    const db = env('MONGODB_DB');
+    const user = checkEnv('MONGODB_USER');
+    const pwd = checkEnv('MONGODB_PASSWORD');
+    const url = checkEnv('MONGODB_URL');
+    const db = checkEnv('MONGODB_DB');
 
     await mongoose.connect(
       `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`,
