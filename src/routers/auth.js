@@ -14,6 +14,6 @@ const router = Router();
 router.post('/register', validateBody(userValidationShema), ctrlWrapper,(registerUserController));
 router.post('/login', validateBody(userLoginSchema), ctrlWrapper(loginUserController));
 router.post('/logaut', ctrlWrapper(logoutUserController));
-router.post('/refresh token', ctrlWrapper(refreshTokenController));
+router.post('/refresh', ctrlWrapper(refreshTokenController));
 
 export default router;
