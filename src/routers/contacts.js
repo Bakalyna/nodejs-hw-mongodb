@@ -29,6 +29,10 @@ router.patch(
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
-router.delete('/:contactId',isValidId, ctrlWrapper(deleteContactByIDController));
+router.delete(
+  '/:contactId',
+  isValidId,
+  ctrlWrapper(deleteContactByIDController),
+);
 
 export default router;
