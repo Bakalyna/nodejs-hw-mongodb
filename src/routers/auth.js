@@ -11,8 +11,16 @@ import { userLoginSchema, userValidationShema } from '../validation/auth.js';
 
 const router = Router();
 
-router.post('/register', validateBody(userValidationShema), ctrlWrapper(registerUserController));
-router.post('/login', validateBody(userLoginSchema), ctrlWrapper(loginUserController));
+router.post(
+  '/register',
+  validateBody(userValidationShema),
+  ctrlWrapper(registerUserController),
+);
+router.post(
+  '/login',
+  validateBody(userLoginSchema),
+  ctrlWrapper(loginUserController),
+);
 router.post('/logaut', ctrlWrapper(logoutUserController));
 router.post('/refresh', ctrlWrapper(refreshTokenController));
 
