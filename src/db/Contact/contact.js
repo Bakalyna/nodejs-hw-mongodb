@@ -28,13 +28,14 @@ const contactSchema = new Schema(
       type: String,
       required: true,
     },
+    photo: {
+      type: String,
+    },
   },
   {
     timestamps: true,
     versionKey: false,
   },
 );
-
-
 
 export const contactsModel = model('contacts', contactSchema);
