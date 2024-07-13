@@ -16,6 +16,7 @@ import handlebars from 'handlebars';
 import path from 'path';
 import fs from 'node:fs/promises';
 
+
 export const registerUser = async (payload) => {
   const user = await UserModel.findOne({ email: payload.email });
   if (user) throw createHttpError(409, 'This email already in use');
@@ -153,3 +154,4 @@ export const resetPassword = async (payload) => {
 
   await SessionModel.deleteOne({ _id: user._id });
 };
+
