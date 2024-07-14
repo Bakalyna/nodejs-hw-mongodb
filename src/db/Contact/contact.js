@@ -17,10 +17,11 @@ const contactSchema = new Schema(
     isFavorite: {
       type: Boolean,
       default: false,
+      required:false,
     },
     contactType: {
       type: String,
-      required: true,
+      required: false,
       default: 'personal',
       enum: ['work', 'home', 'personal'],
     },
