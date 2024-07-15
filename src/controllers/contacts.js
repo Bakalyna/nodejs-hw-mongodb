@@ -72,7 +72,7 @@ export const createContactController = async (req, res) => {
 
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
-
+console.log(req.body);
    const photo = req.file;
   let photoUrl;
 
