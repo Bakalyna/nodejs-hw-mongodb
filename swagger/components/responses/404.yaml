@@ -5,7 +5,20 @@ content:
       type: object
       required:
         - message
+        - status
+        - data
       properties:
+        status:
+          type: integer
+          example: 404
         message:
           type: string
-          example: 'Route not found'
+          example: 'Contact not found'
+        data:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              example: 'Contact not found'

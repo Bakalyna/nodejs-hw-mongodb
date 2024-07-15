@@ -11,7 +11,10 @@
   },
   "servers": [
     {
-      "url": "https://nodejs-hw-mongodb-0agh.onrender.com"
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://nodejs-hw-mongodb-6-3y32.onrender.com"
     }
   ],
   "tags": [
@@ -27,10 +30,12 @@
   "paths": {
     "/contacts": {
       "get": {
-        "tags": ["Contacts"],
-        "summary": "Get list of students",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get list of contacts",
         "operationId": "getContacts",
-        "description": "Get list of users with this endpoint",
+        "description": "Get list of contacts with this endpoint",
         "security": [
           {
             "bearerAuth": []
@@ -58,7 +63,7 @@
             "name": "sortBy",
             "schema": {
               "type": "string",
-              "example": "email",
+              "example": "_id",
               "description": "All contact's fields can be mentioned. Default value - _id"
             }
           },
@@ -67,7 +72,10 @@
             "name": "sortOrder",
             "schema": {
               "type": "string",
-              "enum": ["asc", "desc"],
+              "enum": [
+                "asc",
+                "desc"
+              ],
               "example": "asc"
             }
           },
@@ -75,16 +83,20 @@
             "in": "query",
             "name": "isFavourite",
             "schema": {
-              "type": "boolean",
-              "example": true
-            }
+              "type": "boolean"
+            },
+            "required": false
           },
           {
             "in": "query",
             "name": "type",
             "schema": {
               "type": "string",
-              "enum": ["work", "home", "personal"],
+              "enum": [
+                "work",
+                "home",
+                "personal"
+              ],
               "example": "work"
             }
           }
@@ -96,7 +108,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["status", "message", "data"],
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -121,7 +137,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/contacts"
+                            "$ref": "#/components/schemas/contact"
                           }
                         },
                         "page": {
@@ -164,8 +180,10 @@
         }
       },
       "post": {
-        "tags": ["Contacts"],
-        "summary": "Create contact",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create contacts",
         "operationId": "createContact",
         "description": "Create a contact with payload",
         "security": [
@@ -178,13 +196,11 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["name", "phoneNumber"],
+                "required": [
+                  "name",
+                  "phoneNumber"
+                ],
                 "properties": {
-                  "userId": {
-                    "description": "Contact id",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
-                  },
                   "name": {
                     "description": "Contact name",
                     "type": "string",
@@ -208,7 +224,11 @@
                   "contactType": {
                     "description": "Contact type",
                     "type": "string",
-                    "enum": ["work", "home", "personal"],
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
                     "example": "work"
                   },
                   "photo": {
@@ -228,7 +248,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["status", "message", "data"],
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -240,7 +264,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/contacts"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -256,10 +280,12 @@
         }
       }
     },
-    "/contacts/{contactId}": {
+    "/contacts/{id}": {
       "get": {
-        "tags": ["Contacts"],
-        "summary": "Get student by id.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get contacts by id.",
         "operationId": "getContactByID",
         "description": "Get contact by Id",
         "security": [
@@ -270,7 +296,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "contactId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -285,7 +311,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["status", "message", "data"],
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -297,7 +327,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/contacts"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -313,8 +343,10 @@
         }
       },
       "delete": {
-        "tags": ["Contacts"],
-        "summary": "Delete student by id.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete contacts by id.",
         "operationId": "deleteContactByID",
         "description": "Delete contact by Id",
         "security": [
@@ -325,7 +357,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "contactId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -346,10 +378,12 @@
         }
       },
       "patch": {
-        "tags": ["Contacts"],
-        "summary": "Patch student by id.",
-        "operationId": "patchContactByID",
-        "description": "Patch contact by Id",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Patch contact by id",
+        "operationId": "patchContact",
+        "description": "Patch contact by id",
         "security": [
           {
             "bearerAuth": []
@@ -358,11 +392,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "contactId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
+              "example": "66825bb8b8e0d31d3694652a"
             }
           }
         ],
@@ -373,35 +407,39 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Contact name",
+                    "description": "Contact's name",
                     "type": "string",
                     "example": "Alex"
                   },
                   "phoneNumber": {
-                    "description": "Contact phone number",
+                    "description": "Contact's phone number",
                     "type": "string",
-                    "example": "00667551424"
+                    "example": "0667551424"
                   },
                   "email": {
-                    "description": "Contact email",
+                    "description": "Contact's email",
                     "type": "string",
                     "example": "alextest@mail.com"
                   },
                   "isFavourite": {
-                    "description": "Is contact is favourite",
+                    "description": "Whether is contact favourite",
                     "type": "boolean",
                     "example": false
                   },
                   "contactType": {
-                    "description": "Contact type",
+                    "description": "Contact's type",
                     "type": "string",
-                    "enum": ["work", "home", "personal"],
-                    "example": "work"
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "default": "personal"
                   },
                   "photo": {
                     "description": "Contact photo",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+                    "format": "binary"
                   }
                 }
               }
@@ -410,12 +448,16 @@
         },
         "responses": {
           "200": {
-            "description": "Contact update",
+            "description": "Patch contact by id",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["status", "message", "data"],
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -427,7 +469,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/contacts"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -452,14 +494,17 @@
       }
     },
     "schemas": {
-      "contacts": {
+      "contact": {
         "type": "object",
-        "required": ["userId", "name", "phoneNumber"],
+        "required": [
+          "name",
+          "phoneNumber"
+        ],
         "properties": {
-          "userId": {
+          "_id": {
             "description": "Contact id",
             "type": "string",
-            "example": "65e4decdd286b30065d54af9"
+            "example": "66825bb8b8e0d31d3694652a"
           },
           "name": {
             "description": "Contact name",
@@ -477,20 +522,29 @@
             "example": "alextest@mail.com"
           },
           "isFavourite": {
-            "description": "Is contact is favourite",
+            "description": "Is this contact favourite",
             "type": "boolean",
             "example": false
           },
           "contactType": {
             "description": "Contact type",
             "type": "string",
-            "enum": ["work", "home", "personal"],
-            "example": "work"
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "example": "personal"
+          },
+          "userId": {
+            "description": "Contact user id",
+            "type": "string",
+            "example": "666c166d789292a778a0070d"
           },
           "photo": {
-            "description": "Contact photo",
+            "description": "Link to contact photo",
             "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+            "example": "<https://res.cloudinary.com/uqwgdu/image/upload/image.png>"
           }
         }
       }
@@ -502,7 +556,11 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": ["status", "message", "data"],
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -514,7 +572,9 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": ["message"],
+                  "required": [
+                    "message"
+                  ],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -533,11 +593,31 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": ["message"],
+              "required": [
+                "message",
+                "status",
+                "data"
+              ],
               "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
                 "message": {
                   "type": "string",
-                  "example": "Route not found"
+                  "example": "Contact not found"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Contact not found"
+                    }
+                  }
                 }
               }
             }

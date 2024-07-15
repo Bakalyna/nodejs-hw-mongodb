@@ -14,10 +14,10 @@ const contactSchema = new Schema(
       type: String,
       required: false,
     },
-    isFavorite: {
+    isFavourite: {
       type: Boolean,
       default: false,
-      required:false,
+      required: false,
     },
     contactType: {
       type: String,
